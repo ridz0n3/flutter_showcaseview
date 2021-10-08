@@ -57,8 +57,7 @@ class _MailPageState extends State<MailPage> {
     super.initState();
     //Start showcase view after current widget frames are drawn.
     WidgetsBinding.instance!.addPostFrameCallback((_) =>
-        ShowCaseWidget.of(context)!
-            .startShowCase([_one, _two, _three, _four, _five]));
+        ShowCaseWidget.of(context)!.startShowCase([_one, _two, _three, _four, _five]));
     mails = [
       Mail(
         sender: 'Medium',
@@ -193,11 +192,7 @@ class _MailPageState extends State<MailPage> {
                       overlayPadding: EdgeInsets.all(5),
                       key: _two,
                       title: 'Profile',
-                      description:
-                          'Tap to see profile which contains user\'s name, profile picture, mobile number and country',
-                      contentPadding: EdgeInsets.all(8.0),
-                      showcaseBackgroundColor: Theme.of(context).primaryColor,
-                      textColor: Colors.white,
+                      description: 'Tap to see profile which contains user\'s name, profile picture, mobile number and country',
                       shapeBorder: CircleBorder(),
                       child: Container(
                         padding: EdgeInsets.all(5),
@@ -276,7 +271,7 @@ class _MailPageState extends State<MailPage> {
         );
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        //padding: const EdgeInsets.symmetric(vertical: 8),
         child: Showcase(
           key: _three,
           description: 'Tap to check mail',
@@ -304,41 +299,10 @@ class _MailPageState extends State<MailPage> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Showcase.withWidget(
+                      Showcase(
                         key: _four,
-                        height: 50,
-                        width: 140,
+                        description: 'Tap to check mail',
                         shapeBorder: CircleBorder(),
-                        container: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              width: 45,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xffFCD8DC),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'S',
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Your sender\'s profile ',
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
-                        ),
                         child: Container(
                           margin: const EdgeInsets.all(10),
                           child: Container(

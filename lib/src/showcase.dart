@@ -24,6 +24,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:ombre_widget_package/helper/utils.dart';
 
 import 'custom_paint.dart';
 import 'get_position.dart';
@@ -39,22 +40,8 @@ class Showcase extends StatefulWidget {
   final String? title;
   final String? description;
   final ShapeBorder? shapeBorder;
-  final TextStyle? titleTextStyle;
-  final TextStyle? descTextStyle;
-  final EdgeInsets contentPadding;
-  final Color overlayColor;
-  final double overlayOpacity;
-  final Widget? container;
-  final Color showcaseBackgroundColor;
-  final Color textColor;
-  final bool showArrow;
-  final double? height;
-  final double? width;
-  final Duration animationDuration;
-  final VoidCallback? onToolTipClick;
   final VoidCallback? onTargetClick;
   final bool? disposeOnTap;
-  final bool disableAnimation;
   final EdgeInsets overlayPadding;
 
   const Showcase(
@@ -63,27 +50,10 @@ class Showcase extends StatefulWidget {
       this.title,
       required this.description,
       this.shapeBorder,
-      this.overlayColor = Colors.black,
-      this.overlayOpacity = 0.75,
-      this.titleTextStyle,
-      this.descTextStyle,
-      this.showcaseBackgroundColor = Colors.white,
-      this.textColor = Colors.black,
-      this.showArrow = true,
       this.onTargetClick,
       this.disposeOnTap,
-      this.animationDuration = const Duration(milliseconds: 2000),
-      this.disableAnimation = false,
-      this.contentPadding =
-          const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-      this.onToolTipClick,
       this.overlayPadding = EdgeInsets.zero})
-      : height = null,
-        width = null,
-        container = null,
-        assert(overlayOpacity >= 0.0 && overlayOpacity <= 1.0,
-            "overlay opacity should be >= 0.0 and <= 1.0."),
-        assert(
+      : assert(
             onTargetClick == null
                 ? true
                 : (disposeOnTap == null ? false : true),
@@ -94,70 +64,22 @@ class Showcase extends StatefulWidget {
                 : (onTargetClick == null ? false : true),
             "onTargetClick is required if you're using disposeOnTap");
 
-  const Showcase.withWidget({
-    this.key,
-    required this.child,
-    required this.container,
-    required this.height,
-    required this.width,
-    this.title,
-    this.description,
-    this.shapeBorder,
-    this.overlayColor = Colors.black,
-    this.overlayOpacity = 0.75,
-    this.titleTextStyle,
-    this.descTextStyle,
-    this.showcaseBackgroundColor = Colors.white,
-    this.textColor = Colors.black,
-    this.onTargetClick,
-    this.disposeOnTap,
-    this.animationDuration = const Duration(milliseconds: 2000),
-    this.disableAnimation = false,
-    this.contentPadding = const EdgeInsets.symmetric(vertical: 8),
-    this.overlayPadding = EdgeInsets.zero,
-  })  : showArrow = false,
-        onToolTipClick = null,
-        assert(overlayOpacity >= 0.0 && overlayOpacity <= 1.0,
-            "overlay opacity should be >= 0.0 and <= 1.0.");
-
   @override
   _ShowcaseState createState() => _ShowcaseState();
 }
 
 class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
   bool _showShowCase = false;
-  Animation<double>? _slideAnimation;
-  late AnimationController _slideAnimationController;
   Timer? timer;
   GetPosition? position;
 
   @override
   void initState() {
     super.initState();
-
-    _slideAnimationController = AnimationController(
-      duration: widget.animationDuration,
-      vsync: this,
-    )..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          _slideAnimationController.reverse();
-        }
-        if (_slideAnimationController.isDismissed) {
-          if (!widget.disableAnimation) {
-            _slideAnimationController.forward();
-          }
-        }
-      });
-
-    _slideAnimation = CurvedAnimation(
-      parent: _slideAnimationController,
-      curve: Curves.easeInOut,
-    );
   }
 
   @override
   void dispose() {
-    _slideAnimationController.dispose();
     super.dispose();
   }
 
@@ -183,7 +105,6 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
     });
 
     if (activeStep == widget.key) {
-      _slideAnimationController.forward();
       if (ShowCaseWidget.of(context)!.autoPlay) {
         timer = Timer(
             Duration(
@@ -221,9 +142,6 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
       timer = null;
     }
     ShowCaseWidget.of(context)!.completed(widget.key);
-    if (!widget.disableAnimation) {
-      _slideAnimationController.forward();
-    }
   }
 
   void _getOnTargetTap() {
@@ -236,10 +154,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
   }
 
   void _getOnTooltipTap() {
-    if (widget.disposeOnTap == true) {
-      ShowCaseWidget.of(context)!.dismiss();
-    }
-    widget.onToolTipClick?.call();
+    ShowCaseWidget.of(context)!.dismiss();
   }
 
   Widget buildOverlayOnTarget(
@@ -261,10 +176,10 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
                 height: MediaQuery.of(context).size.height,
                 child: CustomPaint(
                   painter: ShapePainter(
-                      opacity: widget.overlayOpacity,
+                      opacity: 0.8,
                       rect: position!.getRect(),
                       shapeBorder: widget.shapeBorder,
-                      color: widget.overlayColor),
+                      color: Color(hexStringToHexInt('#040303').hashCode)),
                 ),
               ),
             ),
@@ -280,17 +195,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
               screenSize: screenSize,
               title: widget.title,
               description: widget.description,
-              animationOffset: _slideAnimation,
-              titleTextStyle: widget.titleTextStyle,
-              descTextStyle: widget.descTextStyle,
-              container: widget.container,
-              tooltipColor: widget.showcaseBackgroundColor,
-              textColor: widget.textColor,
-              showArrow: widget.showArrow,
-              contentHeight: widget.height,
-              contentWidth: widget.width,
               onTooltipTap: _getOnTooltipTap,
-              contentPadding: widget.contentPadding,
             ),
           ],
         ),

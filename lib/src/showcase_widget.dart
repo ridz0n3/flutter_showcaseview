@@ -21,6 +21,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:ombre_widget_package/helper/utils.dart';
 
 class ShowCaseWidget extends StatefulWidget {
   final Builder builder;
@@ -121,6 +122,7 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
 
   @override
   Widget build(BuildContext context) {
+    init(context);
     return _InheritedShowCaseView(
       child: widget.builder,
       activeWidgetIds: ids?.elementAt(activeWidgetId!),

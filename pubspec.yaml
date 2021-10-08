@@ -8,6 +8,10 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
+  ombre_widget_package:
+    git:
+      url: https://github.com/ombreapp/ombre-flutter-components.git
+      ref: nonNullSafety
   flutter:
     sdk: flutter
 
@@ -17,3 +21,19 @@ dev_dependencies:
   effective_dart: ^1.3.2
 
 flutter:
+  fonts:
+    - family: PlayfairDisplay-Regular
+      fonts:
+        - asset: font/PlayfairDisplay-Regular.ttf
+
+    - family: PlayfairDisplay-Bold
+      fonts:
+        - asset: font/PlayfairDisplay-Bold.ttf
+
+    - family: Poppins-Regular
+      fonts:
+        - asset: font/Poppins-Regular.ttf
+
+    - family: Poppins-Bold
+      fonts:
+        - asset: font/Poppins-Bold.ttf

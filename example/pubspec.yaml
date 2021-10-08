@@ -21,3 +21,20 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+
+  fonts:
+    - family: PlayfairDisplay-Regular
+      fonts:
+        - asset: font/PlayfairDisplay-Regular.ttf
+
+    - family: PlayfairDisplay-Bold
+      fonts:
+        - asset: font/PlayfairDisplay-Bold.ttf
+
+    - family: Poppins-Regular
+      fonts:
+        - asset: font/Poppins-Regular.ttf
+
+    - family: Poppins-Bold
+      fonts:
+        - asset: font/Poppins-Bold.ttf
