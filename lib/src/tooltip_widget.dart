@@ -117,13 +117,13 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
                                 ? NormalText(
                               text: widget.title!,
                               fontFamily: 'PlayfairDisplay-Bold',
-                              fontSize: 29,
+                              fontSize: 18,
                             ) : Container(),
                             SizedBox(height: setHeight(widget.title != null
                                 ? 8 : 0),),
                             NormalText(
                               text: widget.description!,
-                              fontSize: 14,
+                              fontSize: 11,
                             ),
                           ],
                         ),
