@@ -41,6 +41,7 @@ class Showcase extends StatefulWidget {
   final String? description;
   final ShapeBorder? shapeBorder;
   final VoidCallback? onTargetClick;
+  final VoidCallback? onEndTutorialClick;
   final bool? disposeOnTap;
   final EdgeInsets overlayPadding;
 
@@ -51,6 +52,7 @@ class Showcase extends StatefulWidget {
       required this.description,
       this.shapeBorder,
       this.onTargetClick,
+      this.onEndTutorialClick,
       this.disposeOnTap,
       this.overlayPadding = EdgeInsets.zero})
       : assert(
@@ -154,7 +156,12 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
   }
 
   void _getOnTooltipTap() {
-    ShowCaseWidget.of(context)!.dismiss();
+    if(widget.onEndTutorialClick != null){
+      ShowCaseWidget.of(context)!.dismiss();
+      widget.onEndTutorialClick!();
+    }else{
+      ShowCaseWidget.of(context)!.dismiss();
+    }
   }
 
   Widget buildOverlayOnTarget(

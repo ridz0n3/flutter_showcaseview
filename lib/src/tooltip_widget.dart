@@ -134,13 +134,14 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
                           Expanded(
                             child: NormalText(
                               text: 'Press anywhere to continue',
-                              fontSize: 8,
+                              fontSize: 11,
+                              fontFamily: 'Poppins-Bold',
                             ),
                           ),
                           UnderlineButton(
                             title: 'End Tutorial',
-                            fontSize: 11,
-                            width: 86,
+                            fontSize: 8,
+                            width: 56,
                             onPressed: widget.onTooltipTap,
                           ),
                         ],

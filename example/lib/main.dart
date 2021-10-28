@@ -4,6 +4,7 @@ import 'package:example/detailscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:ombre_widget_package/helper/animate_dialog_box.dart';
 
 void main() => runApp(MyApp());
 
@@ -160,6 +161,17 @@ class _MailPageState extends State<MailPage> {
                                     Showcase(
                                       key: _one,
                                       description: 'Tap to see menu options',
+                                      onEndTutorialClick: () async {
+                                        await tutorial_dialog_box.showCustomAlertBox(
+                                          context: context,
+                                          title: 'Are you sure you want to log out from Ombré?',
+                                          description: 'Once logged out, you will not receive any notifications or events.',
+                                          nextBtnPressed: (){
+                                            Navigator.pop(context);
+                                            ShowCaseWidget.of(context)!.startShowCase([_one, _two, _three, _four, _five]);//BlocProvider.of<ProfileBloc>(context)..add(LogoutUser());
+                                          },
+                                        );
+                                      },
                                       child: Icon(
                                         Icons.menu,
                                         color: Theme.of(context).primaryColor,
