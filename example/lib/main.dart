@@ -203,6 +203,7 @@ class _MailPageState extends State<MailPage> {
                     Showcase(
                       overlayPadding: EdgeInsets.all(5),
                       key: _two,
+                      noHole: true,
                       title: 'Profile',
                       description: 'Tap to see profile which contains user\'s name, profile picture, mobile number and country',
                       shapeBorder: CircleBorder(),

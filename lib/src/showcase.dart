@@ -43,6 +43,7 @@ class Showcase extends StatefulWidget {
   final VoidCallback? onTargetClick;
   final VoidCallback? onEndTutorialClick;
   final bool? disposeOnTap;
+  final bool noHole;
   final EdgeInsets overlayPadding;
 
   const Showcase(
@@ -54,7 +55,8 @@ class Showcase extends StatefulWidget {
       this.onTargetClick,
       this.onEndTutorialClick,
       this.disposeOnTap,
-      this.overlayPadding = EdgeInsets.zero})
+        this.noHole = false,
+      this.overlayPadding = EdgeInsets.zero,})
       : assert(
             onTargetClick == null
                 ? true
@@ -184,7 +186,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
                 child: CustomPaint(
                   painter: ShapePainter(
                       opacity: 0.8,
-                      rect: position!.getRect(),
+                      rect: widget.noHole ? Rect.zero : position!.getRect(),
                       shapeBorder: widget.shapeBorder,
                       color: Color(hexStringToHexInt('#040303').hashCode)),
                 ),
@@ -196,13 +198,16 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
               onTap: _getOnTargetTap,
               shapeBorder: widget.shapeBorder,
             ),
-            ToolTipWidget(
-              position: position,
-              offset: offset,
-              screenSize: screenSize,
-              title: widget.title,
-              description: widget.description,
-              onTooltipTap: _getOnTooltipTap,
+            GestureDetector(
+              onTap: _nextIfAny,
+              child: ToolTipWidget(
+                position: position,
+                offset: offset,
+                screenSize: screenSize,
+                title: widget.title,
+                description: widget.description,
+                onTooltipTap: _getOnTooltipTap,
+              ),
             ),
           ],
         ),
