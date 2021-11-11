@@ -287,7 +287,7 @@ class _MailPageState extends State<MailPage> {
         //padding: const EdgeInsets.symmetric(vertical: 8),
         child: Showcase(
           key: _three,
-          //isUp: true,
+          isUp: true,
           title: 'Matches Information',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper nulla ut auctor imperdiet eu bibendum tempus feugiat.',
           disposeOnTap: true,

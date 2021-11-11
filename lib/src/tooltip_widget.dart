@@ -96,7 +96,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
     return Stack(
       children: <Widget>[
         Positioned(
-          top: contentY + (widget.isUp ? 90 : 0),
+          top: contentY + (widget.isUp ? setHeight(90) : 0),
           left: setWidth(8),
           right: setWidth(8),
           child: FractionalTranslation(
