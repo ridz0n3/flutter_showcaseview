@@ -243,7 +243,7 @@ class _MailPageState extends State<MailPage> {
               child: ListView.builder(
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    if (index == 0) {
+                    if (index == 1) {
                       return showcaseMailTile(context);
                     }
                     return MailTile(mails[index % mails.length]);
@@ -287,7 +287,9 @@ class _MailPageState extends State<MailPage> {
         //padding: const EdgeInsets.symmetric(vertical: 8),
         child: Showcase(
           key: _three,
-          description: 'Tap to check mail',
+          //isUp: true,
+          title: 'Matches Information',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper nulla ut auctor imperdiet eu bibendum tempus feugiat.',
           disposeOnTap: true,
           onTargetClick: () {
             Navigator.push<void>(

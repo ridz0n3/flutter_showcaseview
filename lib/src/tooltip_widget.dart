@@ -38,6 +38,7 @@ class ToolTipWidget extends StatefulWidget {
   final String? title;
   final String? description;
   static late bool isArrowUp;
+  final bool isUp;
   final VoidCallback? onTooltipTap;
 
   ToolTipWidget(
@@ -46,7 +47,9 @@ class ToolTipWidget extends StatefulWidget {
       this.screenSize,
       this.title,
       this.description,
-      this.onTooltipTap,});
+      this.onTooltipTap,
+        this.isUp = false,
+      });
 
   @override
   _ToolTipWidgetState createState() => _ToolTipWidgetState();
@@ -77,7 +80,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
   @override
   Widget build(BuildContext context) {
     final contentOrientation = findPositionForContent(position!);
-    final contentOffsetMultiplier = contentOrientation == "BELOW" ? 1.0 : -1.0;
+    final contentOffsetMultiplier = widget.isUp ? -1.0 : contentOrientation == "BELOW" ? 1.0 : -1.0;
     ToolTipWidget.isArrowUp = contentOffsetMultiplier == 1.0;
 
     final contentY = ToolTipWidget.isArrowUp
@@ -93,7 +96,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
     return Stack(
       children: <Widget>[
         Positioned(
-          top: contentY,
+          top: contentY + (widget.isUp ? 90 : 0),
           left: setWidth(8),
           right: setWidth(8),
           child: FractionalTranslation(
