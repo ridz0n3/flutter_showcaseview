@@ -39,6 +39,7 @@ class ToolTipWidget extends StatefulWidget {
   final String? description;
   static late bool isArrowUp;
   final bool isUp;
+  final double addTop;
   final VoidCallback? onTooltipTap;
 
   ToolTipWidget(
@@ -49,6 +50,7 @@ class ToolTipWidget extends StatefulWidget {
       this.description,
       this.onTooltipTap,
         this.isUp = false,
+        this.addTop = 0,
       });
 
   @override
@@ -96,7 +98,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
     return Stack(
       children: <Widget>[
         Positioned(
-          top: contentY + (widget.isUp ? setHeight(90) : 0),
+          top: contentY + (widget.isUp ? setHeight(widget.addTop) : 0),
           left: setWidth(8),
           right: setWidth(8),
           child: FractionalTranslation(
