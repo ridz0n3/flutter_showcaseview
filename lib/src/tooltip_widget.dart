@@ -39,6 +39,7 @@ class ToolTipWidget extends StatefulWidget {
   final String? description;
   static late bool isArrowUp;
   final bool isUp;
+  final bool isEnd;
   final double addTop;
   final VoidCallback? onTooltipTap;
 
@@ -50,6 +51,7 @@ class ToolTipWidget extends StatefulWidget {
       this.description,
       this.onTooltipTap,
         this.isUp = false,
+        this.isEnd = false,
         this.addTop = 0,
       });
 
@@ -138,12 +140,12 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
                         children: [
                           Expanded(
                             child: NormalText(
-                              text: 'Press anywhere to continue',
+                              text:  widget.isEnd ? 'Press anywhere to end your tutorial' : 'Press anywhere to continue',
                               fontSize: 11,
                               fontFamily: 'Poppins-Bold',
                             ),
                           ),
-                          UnderlineButton(
+                          widget.isEnd ? Container() : UnderlineButton(
                             title: 'End Tutorial',
                             fontSize: 8,
                             width: 56,

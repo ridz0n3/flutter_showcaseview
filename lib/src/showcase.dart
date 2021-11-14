@@ -46,6 +46,7 @@ class Showcase extends StatefulWidget {
   final VoidCallback? onEndTutorialClick;
   final bool? disposeOnTap;
   final bool noHole;
+  final bool isEnd;
   final EdgeInsets overlayPadding;
 
   const Showcase(
@@ -59,6 +60,7 @@ class Showcase extends StatefulWidget {
       this.disposeOnTap,
         this.isUp = false,
         this.noHole = false,
+        this.isEnd = false,
         this.addTop = 0,
       this.overlayPadding = EdgeInsets.zero,})
       : assert(
@@ -213,6 +215,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
                 title: widget.title,
                 description: widget.description,
                 onTooltipTap: _getOnTooltipTap,
+                isEnd: widget.isEnd,
               ),
             ),
           ],
