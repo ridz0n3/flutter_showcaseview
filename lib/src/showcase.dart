@@ -39,6 +39,7 @@ class Showcase extends StatefulWidget {
   final Widget child;
   final String? title;
   final bool isUp;
+  final bool isDown;
   final double addTop;
   final String? description;
   final ShapeBorder? shapeBorder;
@@ -59,6 +60,7 @@ class Showcase extends StatefulWidget {
       this.onEndTutorialClick,
       this.disposeOnTap,
         this.isUp = false,
+        this.isDown = false,
         this.noHole = false,
         this.isEnd = false,
         this.addTop = 0,
@@ -209,6 +211,7 @@ class _ShowcaseState extends State<Showcase> with TickerProviderStateMixin {
               child: ToolTipWidget(
                 position: position,
                 isUp: widget.isUp,
+                isDown: widget.isDown,
                 addTop: widget.addTop,
                 offset: offset,
                 screenSize: screenSize,

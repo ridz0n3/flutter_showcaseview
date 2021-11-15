@@ -39,6 +39,7 @@ class ToolTipWidget extends StatefulWidget {
   final String? description;
   static late bool isArrowUp;
   final bool isUp;
+  final bool isDown;
   final bool isEnd;
   final double addTop;
   final VoidCallback? onTooltipTap;
@@ -51,6 +52,7 @@ class ToolTipWidget extends StatefulWidget {
       this.description,
       this.onTooltipTap,
         this.isUp = false,
+        this.isDown = false,
         this.isEnd = false,
         this.addTop = 0,
       });
@@ -84,7 +86,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
   @override
   Widget build(BuildContext context) {
     final contentOrientation = findPositionForContent(position!);
-    final contentOffsetMultiplier = widget.isUp ? -1.0 : contentOrientation == "BELOW" ? 1.0 : -1.0;
+    final contentOffsetMultiplier = widget.isDown ? 1.0 : widget.isUp ? -1.0 : contentOrientation == "BELOW" ? 1.0 : -1.0;
     ToolTipWidget.isArrowUp = contentOffsetMultiplier == 1.0;
 
     final contentY = ToolTipWidget.isArrowUp
