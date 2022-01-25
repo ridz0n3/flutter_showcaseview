@@ -24,6 +24,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animator/flutter_animator.dart';
 import 'package:ombre_widget_package/helper/utils.dart';
 
 import 'custom_paint.dart';
@@ -251,16 +252,17 @@ class _TargetWidget extends StatelessWidget {
         translation: const Offset(-0.5, -0.5),
         child: GestureDetector(
           onTap: onTap,
-          child: Container(
-            height: size!.height + 16,
-            width: size!.width + 16,
-            decoration: ShapeDecoration(
-              shape: shapeBorder ??
-                  RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                  ),
+          child: Pulse(
+            preferences: AnimationPreferences(
+              autoPlay: AnimationPlayStates.Loop,
+            ),
+            child: Container(
+              height: size!.height + 16,
+              width: size!.width + 16,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.white60, width: 2),
+              ),
             ),
           ),
         ),
